@@ -28,4 +28,4 @@ dp = Dispatcher(bot,storage=MemoryStorage())
 
 class States(StatesGroup):  # Создаём состояния
     
-    pass
+    EXPECTATION = State()

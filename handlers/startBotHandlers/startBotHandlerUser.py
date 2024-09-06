@@ -19,5 +19,5 @@ from importantFiles.helps import States, dp,bot, cur,conn
 
 async def startBotHandlerUser(message : types.Message):
     pass
-    #TODO first question
+    #TODO send first question
     
