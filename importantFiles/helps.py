@@ -26,6 +26,10 @@ cur = conn.cursor()
 bot = Bot(token=config.TEST_TOKEN)
 dp = Dispatcher(bot,storage=MemoryStorage())
 
-class States(StatesGroup):  # Создаём состояния
+class StatesUser(StatesGroup):  # Создаём состояния юзера
     
     EXPECTATION = State()
+
+
+class StatesAdmin(StatesGroup):  # Создаём состояния Админа
+    MAIN_MENU = State()

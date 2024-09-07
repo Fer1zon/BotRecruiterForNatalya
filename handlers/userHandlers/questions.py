@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 sys.path.append(os.path.dirname(__file__) + '/..')
-from importantFiles.helps import States, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, dp,bot, cur,conn
 
 from importantFiles.config import RECIPIENT_APPLICATIONS
 
@@ -36,7 +36,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
     sendTextToUser = "Спасибо за ваши ответы! После ознакомления с вашей анкетой, мы свяжемся с вами и расскажем о дальнейших шагах."
 
     await call.message.answer(sendTextToUser)
-    await States.EXPECTATION.set()
+    await StatesUser.EXPECTATION.set()
 
 
     keyboard = InlineKeyboardMarkup(row_width=1)
