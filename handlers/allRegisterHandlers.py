@@ -9,15 +9,18 @@ import os
 sys.path.append(os.path.dirname(__file__) + '/..')
 from handlers.startBotHandlers.startBotHandlerAdmin import startBotHandlerAdmin
 from handlers.startBotHandlers.startBotHandlerUser import startBotHandlerUser
-from importantFiles.helps import States, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, dp,bot, cur,conn
+from importantFiles.config import adminId
+
 
 from aiogram import types
 
 
 
 def registerStartHandler(dp:Dispatcher):#Регистратор хандлеров относящихся к началу пользования ботом
-    dp.register_message_handler(startBotHandlerUser, commands="start")
-    dp.register_message_handler(startBotHandlerAdmin, commands="start")
+    
+    dp.register_message_handler(startBotHandlerAdmin, lambda call: call.data in adminId, commands="start")
+    dp.register_message_handler(startBotHandlerUser, lambda call: call.data not in adminId, commands="start")
     
 
 
