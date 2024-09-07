@@ -8,7 +8,7 @@ from pathlib import Path
 
 def getChannelUrl(channelNumber : int) -> str:
     with open(Path('importantFiles','config.json'), "r") as readJSON:
-        return load(readJSON)["channelUrl" + str(channelNumber)]
+        return str(load(readJSON)["channelUrl" + str(channelNumber)])
     
 
 def editChannelUrl(channelNumber : int, newURL : str) -> None:
@@ -22,8 +22,13 @@ def editChannelUrl(channelNumber : int, newURL : str) -> None:
 
 
 
-editChannelUrl(1, "PASS1")
-editChannelUrl(2, "PASS2")
+def getOnlineTestLink():
+    with open(Path('importantFiles','config.json'), "r") as readJSON:
+        return str(load(readJSON)["onlineTest"])
+    
+
+
+
 
         
     

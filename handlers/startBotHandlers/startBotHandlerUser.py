@@ -18,7 +18,8 @@ from importantFiles.helps import StatesUser, dp,bot, cur,conn
 
 
 async def startBotHandlerUser(message : types.Message):
-    sendText = "Ваше ФИО"
-    
-    #TODO send first question
+    sendText = "Напишите ваше ФИО"
+
+    await message.answer(sendText)
+    await StatesUser.NAME_SURNAME.set()
     
