@@ -18,6 +18,7 @@ from importantFiles.helps import States, dp,bot, cur,conn
 
 
 async def startBotHandlerUser(message : types.Message):
-    pass
+    sendText = "Ваше ФИО"
+    
     #TODO send first question
     
