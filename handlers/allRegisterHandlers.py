@@ -9,7 +9,7 @@ import os
 sys.path.append(os.path.dirname(__file__) + '/..')
 from handlers.startBotHandlers.startBotHandlerAdmin import startBotHandlerAdmin
 from handlers.startBotHandlers.startBotHandlerUser import startBotHandlerUser
-from importantFiles.helps import StatesUser, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, StatesAdmin, dp,bot, cur,conn
 from importantFiles.config import adminId
 
 
@@ -22,6 +22,8 @@ from aiogram import types
 from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNumber, telegramUsername, socialNetwork, salesExperience, workExperience, dismissalReason, noResult, currentWork, fastPrint, attitudeChange, currentPC, important, speedTraining, timeZone, onlineTestImg, acceptPolicyProcessPersonalData
 
 
+
+from adminHandlers.applicationsManagement.newApplications import acceptApplication, declineApplication, admissionToTraining
 
 def registerStartHandler(dp:Dispatcher):#Регистратор хандлеров относящихся к началу пользования ботом
     
@@ -58,7 +60,9 @@ def registerUserHandler(dp:Dispatcher):#Регистрация юзерских 
 
 
 def registerAdminHandler(dp:Dispatcher):#Регистрация админ хандлеров
-    pass
+    dp.register_callback_query_handler(acceptApplication, lambda call: call.data.split("|")[0] == "accept", state = StatesAdmin.MAIN_MENU)
+    dp.register_callback_query_handler(declineApplication, lambda call: call.data.split("|")[0] == "decline", state = StatesAdmin.MAIN_MENU)
+    dp.register_callback_query_handler(admissionToTraining, lambda call: call.data.split("|")[0] == "admissionToTraining", state = StatesAdmin.MAIN_MENU)
 
 
 

@@ -264,7 +264,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
 
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(
-                InlineKeyboardButton("Принять", callback_data=f"accept|{call.from_user.id}"),
+                InlineKeyboardButton("Принять ✅", callback_data=f"accept|{call.from_user.id}"),
                 InlineKeyboardButton("Отклонить ❌", callback_data=f"decline|{call.from_user.id}")
                 )
     
