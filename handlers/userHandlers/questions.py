@@ -324,7 +324,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
     with open(pathToNewFile, "w", encoding="utf-8") as newFile:
         newFile.write(applicationText)
 
-    onlineTestImgMessage = await call.message.answer_photo(photo=onlineTestImg)
+    onlineTestImgMessage = await bot.send_photo(chat_id=RECIPIENT_APPLICATIONS, photo=onlineTestImg)
     with open(pathToNewFile, "rb") as sendFile:
         await bot.send_document(chat_id = RECIPIENT_APPLICATIONS, document = sendFile, reply_markup=keyboard, reply_to_message_id=onlineTestImgMessage.message_id)
     
