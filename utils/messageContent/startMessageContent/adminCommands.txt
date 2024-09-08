@@ -1,1 +1,4 @@
 Добро пожаловать в админ панель
+/edit_channel_url_1 {Новая ссылка} - Изменить ссылку на первый канал с обучением( /edit_channel_url_1 https://www.google.com )
+/edit_channel_url_2 {Новая ссылка} - Изменить ссылку на второй канал с обучением( /edit_channel_url_2 https://www.google.com )
+/edit_online_test_url {Новая ссылка} - Изменить ссылку на онлайн тест( /edit_online_test_url https://vk.com )

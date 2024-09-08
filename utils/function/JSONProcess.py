@@ -27,6 +27,16 @@ def getOnlineTestLink():
         return str(load(readJSON)["onlineTest"])
     
 
+def editOnlineTestLink(newURL : str) -> None:
+    with open(Path('importantFiles','config.json'), "r") as readJSON:
+        dataNow = load(readJSON)
+        dataNow["onlineTest"] = newURL
+
+    with open(Path('importantFiles','config.json'), "w") as writeJSON:
+        
+        dump(dataNow, writeJSON, indent=4)
+    
+
 
 
 

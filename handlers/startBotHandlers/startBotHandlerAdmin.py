@@ -19,7 +19,7 @@ from utils.function.getMessageText import getCommandsList
 async def startBotHandlerAdmin(message : types.Message):
     sendText = getCommandsList()
 
-    await message.answer(sendText)
+    await message.answer(sendText, disable_web_page_preview=True)
     await StatesAdmin.MAIN_MENU.set()
     
     

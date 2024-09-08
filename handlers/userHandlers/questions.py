@@ -256,7 +256,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
 
     
 
-    sendTextToUser = "Спасибо за ваши ответы! После ознакомления с вашей анкетой, мы свяжемся с вами и расскажем о дальнейших шагах."
+    sendTextToUser = "Спасибо за уделенное время. Результат придет сюда в течение 3-5 рабочих дней"
 
     await call.message.answer(sendTextToUser)
     await StatesUser.EXPECTATION.set()

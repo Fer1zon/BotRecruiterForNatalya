@@ -25,6 +25,8 @@ from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNum
 
 from adminHandlers.applicationsManagement.newApplications import acceptApplication, declineApplication, admissionToTraining
 
+from adminHandlers.mainAdminHandler import editLink1, editLink2, editOnlineTestLinkH
+
 def registerStartHandler(dp:Dispatcher):#Регистратор хандлеров относящихся к началу пользования ботом
     
     dp.register_message_handler(startBotHandlerAdmin, lambda msg: msg.from_user.id in adminId, commands="start")
@@ -63,6 +65,11 @@ def registerAdminHandler(dp:Dispatcher):#Регистрация админ ха�
     dp.register_callback_query_handler(acceptApplication, lambda call: call.data.split("|")[0] == "accept", state = StatesAdmin.MAIN_MENU)
     dp.register_callback_query_handler(declineApplication, lambda call: call.data.split("|")[0] == "decline", state = StatesAdmin.MAIN_MENU)
     dp.register_callback_query_handler(admissionToTraining, lambda call: call.data.split("|")[0] == "admissionToTraining", state = StatesAdmin.MAIN_MENU)
+
+    dp.register_message_handler(editLink1, commands="edit_channel_url_1", state = StatesAdmin.MAIN_MENU)
+    dp.register_message_handler(editLink2, commands="edit_channel_url_2", state = StatesAdmin.MAIN_MENU)
+    dp.register_message_handler(editOnlineTestLinkH, commands="edit_online_test_url", state = StatesAdmin.MAIN_MENU)
+
 
 
 
