@@ -38,6 +38,9 @@ async def admissionToTraining(call : types.CallbackQuery):
     sendTextToAdmin = "Пользователь допущен"
 
 
+    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест", callback_data="startModule1"))
+
+
 
     await call.message.delete()
     await call.answer(sendTextToAdmin)
@@ -45,8 +48,7 @@ async def admissionToTraining(call : types.CallbackQuery):
 
 
 
-    await bot.send_message(chat_id=clientId, text=sendTextToClient)
-    #TODO Первый вопрос из первого блока туда сюда
+    await bot.send_message(chat_id=clientId, text=sendTextToClient, reply_markup=keyboard)
 
 
 

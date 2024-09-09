@@ -51,5 +51,26 @@ class StatesUser(StatesGroup):  # Создаём состояния юзера
     EXPECTATION = State()
 
 
+    MODULE1_1 = State()
+    MODULE1_2 = State()
+    MODULE1_3 = State()
+    MODULE1_4 = State()
+    MODULE1_5 = State()
+    MODULE1_6 = State()
+    MODULE1_7 = State()
+    MODULE1_8 = State()
+    MODULE1_9 = State()
+    MODULE1_10 = State()
+    MODULE1_11 = State()
+
+
+    MODULE2_1 = State()
+    MODULE2_2 = State()
+    MODULE2_3 = State()
+    MODULE2_4 = State()
+    MODULE2_5 = State()
+    
+
+
 class StatesAdmin(StatesGroup):  # Создаём состояния Админа
     MAIN_MENU = State()
