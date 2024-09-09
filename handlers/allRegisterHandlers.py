@@ -24,6 +24,8 @@ from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNum
 
 from handlers.userHandlers.testModules.module1 import module1Question1, module1Question2, module1Question3, module1Question4, module1Question5, module1Question6, module1Question7, module1Question8, module1Question9, module1Question10, module1Question11, startTestModule1
 
+from handlers.userHandlers.testModules.module2 import startModule2, module2Question1, module2Question2, module2Question3, module2Question4, module2Question5
+
 
 
 from adminHandlers.applicationsManagement.newApplications import acceptApplication, declineApplication, admissionToTraining
@@ -78,6 +80,16 @@ def registerUserHandler(dp:Dispatcher):#Регистрация юзерских 
     dp.register_message_handler(module1Question9, content_types="text", state = StatesUser.MODULE1_9)
     dp.register_message_handler(module1Question10, content_types="text", state = StatesUser.MODULE1_10)
     dp.register_message_handler(module1Question11, content_types="text", state = StatesUser.MODULE1_11)
+
+
+    #Тест 2 модуль
+    dp.register_callback_query_handler(startModule2, lambda call: call.data == "startModule2", state = StatesUser.EXPECTATION)
+
+    dp.register_message_handler(module2Question1, content_types="text", state = StatesUser.MODULE2_1)
+    dp.register_message_handler(module2Question2, content_types="text", state = StatesUser.MODULE2_2)
+    dp.register_message_handler(module2Question3, content_types="text", state = StatesUser.MODULE2_3)
+    dp.register_message_handler(module2Question4, content_types="text", state = StatesUser.MODULE2_4)
+    dp.register_message_handler(module2Question5, content_types="text", state = StatesUser.MODULE2_5)
 
 
 def registerAdminHandler(dp:Dispatcher):#Регистрация админ хандлеров
