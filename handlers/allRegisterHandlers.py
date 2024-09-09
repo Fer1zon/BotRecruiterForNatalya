@@ -22,6 +22,9 @@ from aiogram import types
 from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNumber, telegramUsername, socialNetwork, salesExperience, workExperience, dismissalReason, noResult, currentWork, fastPrint, attitudeChange, currentPC, important, speedTraining, timeZone, onlineTestImg, acceptPolicyProcessPersonalData
 
 
+from handlers.userHandlers.testModules.module1 import module1Question1, module1Question2, module1Question3, module1Question4, module1Question5, module1Question6, module1Question7, module1Question8, module1Question9, module1Question10, module1Question11, startTestModule1
+
+
 
 from adminHandlers.applicationsManagement.newApplications import acceptApplication, declineApplication, admissionToTraining
 
@@ -40,6 +43,7 @@ def registerOtherHandler(dp:Dispatcher):#Регистратор хандлеро
 
 
 def registerUserHandler(dp:Dispatcher):#Регистрация юзерских хандлеров
+    #Вступительный тест
     dp.register_message_handler(nameSurname, content_types="text", state = StatesUser.NAME_SURNAME)
     dp.register_message_handler(residenceCity, content_types="text", state = StatesUser.RESIDENCE_CITY)
     dp.register_message_handler(phoneNumber, content_types="text", state = StatesUser.PHONE_NUMBER)
@@ -59,6 +63,20 @@ def registerUserHandler(dp:Dispatcher):#Регистрация юзерских 
     dp.register_message_handler(onlineTestImg, content_types="photo", state = StatesUser.ONLINE_TEST_IMG)
     dp.register_callback_query_handler(acceptPolicyProcessPersonalData, lambda call: call.data == "acceptPolicy", state = StatesUser.ACCEPT_POLICY_PERSONAL_DATA)
 
+    #Тест 1 модуль
+    dp.register_callback_query_handler(startTestModule1, lambda call: call.data == "startModule1", state = StatesUser.EXPECTATION)
+
+    dp.register_message_handler(module1Question1, content_types="text", state = StatesUser.MODULE1_1)
+    dp.register_message_handler(module1Question2, content_types="text", state = StatesUser.MODULE1_2)
+    dp.register_message_handler(module1Question3, content_types="text", state = StatesUser.MODULE1_3)
+    dp.register_message_handler(module1Question4, content_types="text", state = StatesUser.MODULE1_4)
+    dp.register_message_handler(module1Question5, content_types="text", state = StatesUser.MODULE1_5)
+    dp.register_message_handler(module1Question6, content_types="text", state = StatesUser.MODULE1_6)
+    dp.register_message_handler(module1Question7, content_types="text", state = StatesUser.MODULE1_7)
+    dp.register_message_handler(module1Question8, content_types="text", state = StatesUser.MODULE1_8)
+    dp.register_message_handler(module1Question9, content_types="text", state = StatesUser.MODULE1_9)
+    dp.register_message_handler(module1Question10, content_types="text", state = StatesUser.MODULE1_10)
+    dp.register_message_handler(module1Question11, content_types="text", state = StatesUser.MODULE1_11)
 
 
 def registerAdminHandler(dp:Dispatcher):#Регистрация админ хандлеров

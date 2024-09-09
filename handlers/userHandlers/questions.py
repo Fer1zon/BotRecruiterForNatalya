@@ -13,7 +13,7 @@ from importantFiles.helps import StatesUser, dp,bot, cur,conn
 from importantFiles.config import RECIPIENT_APPLICATIONS
 
 
-from utils.function.createFileApplicationPath import createFilePath
+from utils.function.createFileApplicationPath import createFilePathToNewApplication
 from utils.function.JSONProcess import getOnlineTestLink
 
 from userHandlers import keyboard as kb
@@ -319,7 +319,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
 
 Московское время: {timeZone}
 """
-    pathToNewFile = createFilePath(Path("utils","applications"))
+    pathToNewFile = createFilePathToNewApplication(Path("utils","applications"))
 
     with open(pathToNewFile, "w", encoding="utf-8") as newFile:
         newFile.write(applicationText)

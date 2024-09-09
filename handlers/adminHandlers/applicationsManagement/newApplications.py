@@ -11,6 +11,8 @@ import os
 sys.path.append(os.path.dirname(__file__) + '/..')
 from importantFiles.helps import StatesAdmin, dp,bot
 
+from utils.function.JSONProcess import getChannelUrl
+
 
 
 #Нужно проверить, сохраняется ли путь к файлу в самом сообщении
@@ -34,7 +36,8 @@ async def acceptApplication(call: types.CallbackQuery):
 async def admissionToTraining(call : types.CallbackQuery):
     clientId = call.data.split("|")[-1]
 
-    sendTextToClient = "Вы допущены до обучения"
+    sendTextToClient = f"""Вы допущены до обучения. В начале ознакомьтесь с материалами в <a href = '{getChannelUrl(1)}'>Канале</a>, затем приступайте к тесту
+При ответах на вопросы можно брать информацию из <a href = '{getChannelUrl(1)}'>Канала</a> с обучением - важно, чтобы вы понимали где в нужный момент найти ответ на свой вопрос по поводу ситуации. Допустимо 2 ошибки для положительного результата."""
     sendTextToAdmin = "Пользователь допущен"
 
 
@@ -48,7 +51,7 @@ async def admissionToTraining(call : types.CallbackQuery):
 
 
 
-    await bot.send_message(chat_id=clientId, text=sendTextToClient, reply_markup=keyboard)
+    await bot.send_message(chat_id=clientId, text=sendTextToClient, reply_markup=keyboard, disable_web_page_preview=True)
 
 
 
