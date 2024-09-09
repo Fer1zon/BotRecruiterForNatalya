@@ -29,7 +29,7 @@ from handlers.userHandlers.testModules.module2 import startModule2, module2Quest
 
 
 from adminHandlers.applicationsManagement.newApplications import acceptApplication, declineApplication, admissionToTraining
-from adminHandlers.applicationsManagement.trainingApplications import declineTestModule1, acceptTestModule1
+from adminHandlers.applicationsManagement.trainingApplications import declineTestModule1, acceptTestModule1, acceptTestModule2, declineTestModule2, interviewSuccess, interviewFailed
 
 from adminHandlers.mainAdminHandler import editLink1, editLink2, editOnlineTestLinkH
 
@@ -99,6 +99,12 @@ def registerAdminHandler(dp:Dispatcher):#Регистрация админ ха�
 
     dp.register_callback_query_handler(declineTestModule1, lambda call: call.data.split("|")[0] == "declineModule1", state = StatesAdmin.MAIN_MENU)
     dp.register_callback_query_handler(acceptTestModule1, lambda call: call.data.split("|")[0] == "acceptModule1", state = StatesAdmin.MAIN_MENU)
+
+    dp.register_callback_query_handler(declineTestModule2, lambda call: call.data.split("|")[0] == "declineModule2", state = StatesAdmin.MAIN_MENU)
+    dp.register_callback_query_handler(acceptTestModule2, lambda call: call.data.split("|")[0] == "acceptModule2", state = StatesAdmin.MAIN_MENU)
+
+    dp.register_callback_query_handler(interviewSuccess, lambda call: call.data.split("|")[0] == "interviewSuccess", state = StatesAdmin.MAIN_MENU)
+    dp.register_callback_query_handler(interviewFailed, lambda call: call.data.split("|")[0] == "interviewFailed", state = StatesAdmin.MAIN_MENU)
 
 
     dp.register_message_handler(editLink1, commands="edit_channel_url_1", state = StatesAdmin.MAIN_MENU)

@@ -78,8 +78,8 @@ async def module2Question5(message : types.Message, state:FSMContext):
 
     keyboard = InlineKeyboardMarkup(row_width=1)
     keyboard.add(
-                InlineKeyboardButton("Допустить", callback_data=f"acceptModule2|{message.from_user.id}"),
-                InlineKeyboardButton("Не допустить", callback_data=f"declineModule2|{message.from_user.id}")
+                InlineKeyboardButton("Принять ✅", callback_data=f"acceptModule2|{message.from_user.id}"),
+                InlineKeyboardButton("Отклонить ❌", callback_data=f"declineModule2|{message.from_user.id}")
                 )
     async with state.proxy() as stateData:
         nameSurname = stateData["nameSurname"]
