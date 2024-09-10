@@ -9,7 +9,7 @@ TEST_TOKEN = os.environ.get('TEST_TOKEN')
 
 RECIPIENT_APPLICATIONS = os.environ["RECIPIENT_APPLICATIONS"]
 
-adminId = [5530562487]
+adminId = [5530562487, 6836588559]
 
 
 dataBasePath = os.path.dirname(__file__) + '/dataBase/data_base.db'

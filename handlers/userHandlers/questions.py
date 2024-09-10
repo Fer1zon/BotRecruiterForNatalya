@@ -90,18 +90,30 @@ async def salesExperience(message:types.Message, state : FSMContext):
     
     await state.update_data(salesExperience = message.text)
 
-    sendText = "В каких компаниях вы уже работали?"
+    sendText = "В каких компаниях вы уже работали?(Можете прикрепить ссылку на резюме, или файл)"
 
     await message.answer(sendText)
     await StatesUser.WORK_EXPERIENCE.set()
 
 
 
-async def workExperience(message:types.Message, state:FSMContext):
+async def workExperienceText(message:types.Message, state:FSMContext):
     if len(message.text) > 500:
         return await message.answer("Текст слишком длинный. Попробуйте сократить количество не нужной информации.")
     
-    await state.update_data(workExperience = message.text)
+    await state.update_data(workExperienceText = message.text, workExperienceFile = "...")
+
+
+    sendText = "Причина (ы) увольнения с прошлого (ых) мест работы"
+
+    await message.answer(sendText)
+    await StatesUser.DISMISSAL_REASON.set()
+
+
+async def workExperienceFileH(message : types.Message, state :FSMContext):
+    fileId = message.document.file_id
+
+    await state.update_data(workExperienceText = "...", workExperienceFile = fileId)
 
 
     sendText = "Причина (ы) увольнения с прошлого (ых) мест работы"
@@ -217,8 +229,7 @@ async def timeZone(message:types.Message, state:FSMContext):
     await state.update_data(timeZone = message.text)
 
 
-    sendText = f"""Для рассмотрения вашей кандидатуры важно пройти <a href = '{getOnlineTestLink()}'>опрос-собеседование</a> из 17 вопросов. Если вашу кандидатуру одобрят, то с вами свяжутся и вы получите доступ к обучению.
-После прохождения теста отправьте в чат результат пройденного теста в формате скриншота."""
+    sendText = f"""Пройдите пожалуйста тест и загрузите сюда скрин результата {getOnlineTestLink()}"""
 
     await message.answer(sendText, reply_markup = types.ReplyKeyboardRemove(), disable_web_page_preview=True)
     await StatesUser.ONLINE_TEST_IMG.set()
@@ -226,7 +237,7 @@ async def timeZone(message:types.Message, state:FSMContext):
 
 
 async def onlineTestImg(message: types.Message, state: FSMContext):
-    await state.update_data(onlineTestResult = message.photo[-1].file_id)
+    await state.update_data(onlineTestResult = "compression" + "|" +message.photo[-1].file_id)
 
     sendText = "Для отправки заявки вам нужно подтвердить то что вы соглашаетесь с политикой обработки персональных данных👇"
 
@@ -234,6 +245,17 @@ async def onlineTestImg(message: types.Message, state: FSMContext):
         await message.answer_document(document=sendFile, caption=sendText, reply_markup=kb.sendApplicationsKb)
 
     await StatesUser.ACCEPT_POLICY_PERSONAL_DATA.set()
+
+async def onlineTestImgNotCompression(message : types.Message, state : FSMContext):
+    await state.update_data(onlineTestResult = "notCompression" + "|" +message.document.file_id)
+
+    sendText = "Для отправки заявки вам нужно подтвердить то что вы соглашаетесь с политикой обработки персональных данных👇"
+
+    with open(Path("utils","messageContent","ППД.docx"), "rb") as sendFile:
+        await message.answer_document(document=sendFile, caption=sendText, reply_markup=kb.sendApplicationsKb)
+
+    await StatesUser.ACCEPT_POLICY_PERSONAL_DATA.set()
+
 
 
 
@@ -256,7 +278,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
 
     
 
-    sendTextToUser = "Спасибо за уделенное время. Результат придет сюда в течение 3-5 рабочих дней"
+    sendTextToUser = "Спасибо за уделенное время. Результат придет сюда в течение 3-5 рабочих дней."
 
     await call.message.answer(sendTextToUser)
     await StatesUser.EXPECTATION.set()
@@ -277,7 +299,8 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
         telegramUsername = stateData["username"]
         socialNetwork = stateData["socialNetwork"]
         salesExperience = stateData["salesExperience"]
-        workExperience = stateData["workExperience"]
+        workExperienceText = stateData["workExperienceText"]
+        workExperienceFile = stateData["workExperienceFile"]
         dismissalReason = stateData["dismissalReason"]
         noResult = stateData["noResult"]
         currentWork = stateData["currentWork"]
@@ -287,7 +310,8 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
         important = stateData["important"]
         speedTraining = stateData["speedTraining"]
         timeZone = stateData["timeZone"]
-        onlineTestImg = stateData["onlineTestResult"]
+        onlineTestImg = stateData["onlineTestResult"].split("|")[-1]
+        compression = stateData["onlineTestResult"].split("|")[0]
     applicationText = f"""
 Дата заполнения: {datetime.now()}
 ФИО: {nameSurname}
@@ -299,7 +323,7 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
 
 Опыт продаж: {salesExperience}
 
-В компаниях работал(а): {workExperience}
+В компаниях работал(а): {workExperienceText}
 
 Причина увольнений: {dismissalReason}
 
@@ -324,8 +348,16 @@ async def acceptPolicyProcessPersonalData(call : types.CallbackQuery, state :FSM
     with open(pathToNewFile, "w", encoding="utf-8") as newFile:
         newFile.write(applicationText)
 
-    onlineTestImgMessage = await bot.send_photo(chat_id=RECIPIENT_APPLICATIONS, photo=onlineTestImg)
+    if compression == "compression":
+        onlineTestImgMessage = await bot.send_photo(chat_id=RECIPIENT_APPLICATIONS, photo=onlineTestImg)
+
+    else:
+        onlineTestImgMessage = await bot.send_document(chat_id=RECIPIENT_APPLICATIONS, document=onlineTestImg)
+
     with open(pathToNewFile, "rb") as sendFile:
+        if workExperienceFile != "...":
+            await bot.send_document(chat_id = RECIPIENT_APPLICATIONS, document = workExperienceFile, caption="Резюме", reply_to_message_id=onlineTestImgMessage.message_id)
+
         await bot.send_document(chat_id = RECIPIENT_APPLICATIONS, document = sendFile, reply_markup=keyboard, reply_to_message_id=onlineTestImgMessage.message_id)
     
     

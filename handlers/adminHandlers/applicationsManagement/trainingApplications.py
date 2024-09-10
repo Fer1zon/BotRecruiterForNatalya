@@ -26,10 +26,10 @@ async def acceptTestModule1(call : types.CallbackQuery):
     sendTextToClient1 = f"Прежде чем приступить к 2-му модулю, ознакомьтесь с материалами в <a href = '{getChannelUrl(2)}'>Канале</a> затем приступайте к тесту. При ответах на вопросы можно брать информацию из <a href = '{getChannelUrl(2)}'>Канала</a> с обучением - важно, чтобы вы понимали где в нужный момент найти ответ на свой вопрос по поводу ситуации"
 
 
-    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест", callback_data="startModule2"))
+    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест из 5 вопросов", callback_data="startModule2"))
 
 
-    await call.message.delete()
+    await call.message.edit_reply_markup(reply_markup=None)
 
     await bot.send_message(chat_id=clientId, text=sendTextToClient)
     await bot.send_message(chat_id=clientId, text=sendTextToClient1, reply_markup=keyboard)
@@ -47,10 +47,10 @@ async def declineTestModule1(call : types.CallbackQuery):
     sendTextToClient = "Здравствуйте. Вы не прошли тест модуля 1. Попробуйте снова."
     
 
-    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест", callback_data="startModule1"))
+    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест из 11 вопросов", callback_data="startModule1"))
 
 
-    await call.message.delete()
+    await call.message.edit_reply_markup(reply_markup=None)
 
 
     await bot.send_message(chat_id=clientId, text = sendTextToClient, reply_markup=keyboard)
@@ -81,10 +81,10 @@ async def acceptTestModule2(call : types.CallbackQuery):
 async def declineTestModule2(call : types.CallbackQuery):
     clientId = call.data.split("|")[-1]
     
-    sendTextToClient = "Здравствуйте. Вы не прошли тест модуля 1. Попробуйте снова."
+    sendTextToClient = "Здравствуйте. Вы не прошли тест модуля 2. Попробуйте снова."
     
 
-    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест", callback_data="startModule2"))
+    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест из 5 вопросов", callback_data="startModule2"))
 
 
     await call.message.edit_reply_markup(reply_markup=None)

@@ -41,11 +41,11 @@ async def admissionToTraining(call : types.CallbackQuery):
     sendTextToAdmin = "Пользователь допущен"
 
 
-    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест", callback_data="startModule1"))
+    keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton("Начать тест из 11 вопросов", callback_data="startModule1"))
 
 
 
-    await call.message.delete()
+    await call.message.edit_reply_markup(reply_markup = None)
     await call.answer(sendTextToAdmin)
 
 
@@ -64,7 +64,7 @@ async def declineApplication(call: types.CallbackQuery):
     sendTextToAdmin = "Заявитель уведомлен"
 
 
-    await call.message.delete()
+    await call.message.edit_reply_markup(reply_markup=None)
     await call.answer(sendTextToAdmin)
 
     await bot.send_message(chat_id=clientId, text=sendTextToClient)

@@ -19,7 +19,7 @@ from aiogram import types
 
 
 
-from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNumber, telegramUsername, socialNetwork, salesExperience, workExperience, dismissalReason, noResult, currentWork, fastPrint, attitudeChange, currentPC, important, speedTraining, timeZone, onlineTestImg, acceptPolicyProcessPersonalData
+from handlers.userHandlers.questions import nameSurname, residenceCity, phoneNumber, telegramUsername, socialNetwork, salesExperience, workExperienceText, workExperienceFileH, dismissalReason, noResult, currentWork, fastPrint, attitudeChange, currentPC, important, speedTraining, timeZone, onlineTestImg, onlineTestImgNotCompression, acceptPolicyProcessPersonalData
 
 
 from handlers.userHandlers.testModules.module1 import module1Question1, module1Question2, module1Question3, module1Question4, module1Question5, module1Question6, module1Question7, module1Question8, module1Question9, module1Question10, module1Question11, startTestModule1
@@ -53,7 +53,8 @@ def registerUserHandler(dp:Dispatcher):#Регистрация юзерских 
     dp.register_message_handler(telegramUsername, content_types="text", state = StatesUser.TELEGRAM_USERNAME)
     dp.register_message_handler(socialNetwork, content_types="text", state = StatesUser.SOCIAL_NETWORK)
     dp.register_message_handler(salesExperience, content_types="text", state = StatesUser.SALES_EXPERIENCE)
-    dp.register_message_handler(workExperience, content_types="text", state = StatesUser.WORK_EXPERIENCE)
+    dp.register_message_handler(workExperienceText, content_types="text", state = StatesUser.WORK_EXPERIENCE)
+    dp.register_message_handler(workExperienceFileH, content_types="document", state = StatesUser.WORK_EXPERIENCE)
     dp.register_message_handler(dismissalReason, content_types="text", state = StatesUser.DISMISSAL_REASON)
     dp.register_message_handler(noResult, content_types="text", state = StatesUser.NO_RESULT)
     dp.register_message_handler(currentWork, content_types="text", state = StatesUser.CURRENT_WORK)
@@ -64,6 +65,7 @@ def registerUserHandler(dp:Dispatcher):#Регистрация юзерских 
     dp.register_message_handler(speedTraining, content_types="text", state = StatesUser.SPEED_TRAINING)
     dp.register_message_handler(timeZone, content_types="text", state = StatesUser.TIME_ZONE)
     dp.register_message_handler(onlineTestImg, content_types="photo", state = StatesUser.ONLINE_TEST_IMG)
+    dp.register_message_handler(onlineTestImgNotCompression, content_types="document", state = StatesUser.ONLINE_TEST_IMG)
     dp.register_callback_query_handler(acceptPolicyProcessPersonalData, lambda call: call.data == "acceptPolicy", state = StatesUser.ACCEPT_POLICY_PERSONAL_DATA)
 
     #Тест 1 модуль
