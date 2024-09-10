@@ -8,7 +8,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 import sys 
 import os 
 sys.path.append(os.path.dirname(__file__) + '/..')
-from importantFiles.helps import StatesUser, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, dp,bot 
 
 
 

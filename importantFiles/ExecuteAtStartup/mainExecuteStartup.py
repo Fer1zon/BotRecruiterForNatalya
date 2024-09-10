@@ -1,4 +1,4 @@
-from .dataBase.mainDataBase import mainDataBaseFunction
+
 
 
 
@@ -6,4 +6,4 @@ from .dataBase.mainDataBase import mainDataBaseFunction
 
 
 def mainExecuteAtStartupFunction():
-    mainDataBaseFunction()
+    pass

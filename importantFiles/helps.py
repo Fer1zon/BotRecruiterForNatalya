@@ -12,10 +12,7 @@ else:
     import config
 
 
-import sqlite3 
 
-conn = sqlite3.connect(config.dataBasePath)
-cur = conn.cursor()
 
 
 
