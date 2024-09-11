@@ -8,7 +8,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 sys.path.append(os.path.dirname(__file__) + '/..')
-from importantFiles.helps import StatesUser, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, dp,bot 
 
 from importantFiles.config import RECIPIENT_APPLICATIONS
 

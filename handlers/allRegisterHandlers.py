@@ -9,7 +9,7 @@ import os
 sys.path.append(os.path.dirname(__file__) + '/..')
 from handlers.startBotHandlers.startBotHandlerAdmin import startBotHandlerAdmin
 from handlers.startBotHandlers.startBotHandlerUser import startBotHandlerUser
-from importantFiles.helps import StatesUser, StatesAdmin, dp,bot, cur,conn
+from importantFiles.helps import StatesUser, StatesAdmin, dp,bot
 from importantFiles.config import adminId
 
 
