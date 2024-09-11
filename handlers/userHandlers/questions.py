@@ -29,7 +29,7 @@ async def nameSurname(message : types.Message, state:FSMContext):
 
     await state.update_data(nameSurname = message.text)
 
-    sendText = "Ваш город проживания"
+    sendText = "Город проживания + 5 слов или пару предложений с которыми у вас ассоциируется ваш город"
     await message.answer(sendText)
     await StatesUser.RESIDENCE_CITY.set()
 
